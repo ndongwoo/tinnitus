@@ -1,105 +1,40 @@
-<html>
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-    <!-- ... -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="./jquery-qrcode-0.18.0.js"></script>
-
-    <link href="https://unpkg.com/survey-jquery/defaultV2.min.css" type="text/css" rel="stylesheet">
-    <script type="text/javascript" src="https://unpkg.com/survey-jquery/survey.jquery.min.js"></script>
-    <!-- ... -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이명 장애 지수(THI) 설문지</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS for styling -->
+    <style>
+        .question-container {
+            display: none;
+        }
+        .active-question {
+            display: block;
+        }
+        .question-number {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .option-button {
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">이명 장애 지수(THI) 설문지</h1>
+        <div id="surveyContainer"></div>
+        <div id="result" class="text-center mt-5"></div>
+    </div>
 
-<div id="surveyContainer"></div>
-<div id="container"></div>
-
-<script>
-const surveyJson = {
-    elements: [{
-        name: "FirstName",
-        title: "Enter your first name:",
-        type: "text"
-    }, {
-        name: "LastName",
-        title: "Enter your last name:",
-        type: "text"
-    }]
-};
-
-const survey = new Survey.Model(surveyJson);
-survey.focusFirstQuestionAutomatic = false;
-
-function alertResults (sender) {
-    const results = JSON.stringify(sender.data);
-//    alert(results);
-	show_qrcode(results);
-}
-
-survey.onComplete.add(alertResults);
-
-$(function() {
-    $("#surveyContainer").Survey({ model: survey });
-});
-
-function show_qrcode(text_value) {
-
-	var options = {
-		// render method: 'canvas', 'image' or 'div'
-		render: 'canvas',
-
-		// version range somewhere in 1 .. 40
-		minVersion: 1,
-		maxVersion: 40,
-
-		// error correction level: 'L', 'M', 'Q' or 'H'
-		ecLevel: 'L',
-
-		// offset in pixel if drawn onto existing canvas
-		left: 0,
-		top: 0,
-
-		// size in pixel
-		size: 300,
-
-		// code color or image element
-		fill: '#47669F',
-
-		// background color or image element, null for transparent background
-		background: null,
-
-		// content
-		text: text_value,
-
-		// corner radius relative to module width: 0.0 .. 0.5
-		radius: 0,
-
-		// quiet zone in modules
-		quiet: 0,
-
-		// modes
-		// 0: normal
-		// 1: label strip
-		// 2: label box
-		// 3: image strip
-		// 4: image box
-		mode: 0,
-
-		mSize: 0.1,
-		mPosX: 0.5,
-		mPosY: 0.5,
-
-		label: 'no label',
-		fontname: 'sans',
-		fontcolor: '#000',
-
-		image: null
-	}
-
-	$("#container").qrcode(options);
-	$("#surveyContainer").hide();
-}
-
-</script>
-
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
